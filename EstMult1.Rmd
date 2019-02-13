@@ -1,0 +1,242 @@
+---
+title: "Introducción a la estadística multidimensional"
+author: ""
+date: ""
+output: 
+  html_document: 
+    number_sections: no
+    toc: no
+---
+
+### Vectores aleatorios
+
+Una **variable aleatoria $p$-dimensional**, o **vector aleatorio de dimensión $p$**, es un vector (fila) compuesto por $p$ variables aleatorias 
+$$
+\underline{X}=(X_1,X_2,\ldots,X_p).
+$$
+Como en el caso de las variables aleatorias unidimensionales, es importante distinguir entre los vectores aleatorios (los modelos teóricos), y las **realizaciones** o  las muestras de los mismos, que corresponden a una o varias mediciones concretas de las variables que forman dichos vectores.
+
+Por ejemplo, si llamamos $X_1$ a la variable aleatoria que da la edad de un individuo (en años), $X_2$ a la que da su altura (redondeada a cm) y $X_3$ a la que da su peso (redondeada a kg con una cifra decimal), entonces
+$$
+\underline{X}=(X_1,X_2,X_3)
+$$
+es un vector aleatorio de dimensión 3. Cada vez que medimos la edad, la altura y el peso de una persona, y organizamos estos datos en este orden como un vector numérico, obtenemos una realización de $\underline{X}$.
+
+Sea ahora $\underline{X}=(X_1,X_2,\ldots,X_p)$ un vector aleatorio y, para cada $i=1,\ldots,p$, sean $\mu_i$ y $\sigma_i$ la media y la desviación típica, respectivamente, de su componente $X_i$. Entonces:
+
+* El **valor esperado**, o **vector de medias**,  de  $\underline{X}$ es el vector formado por los valores esperados, o medias, de sus componentes:
+$$
+E(\underline{X})=(E(X_1),\ldots,E(X_p))=(\mu_1,\ldots,\mu_p).
+$$
+Para abreviar, a veces lo denotaremos simplemente por $\boldsymbol\mu$.
+
+* El **vector de varianzas**  de  $\underline{X}$ es el vector formado por las varianzas de sus componentes:
+$$
+Var(\underline{X})=(Var(X_1),\ldots,Var(X_p))=(\sigma_1^2,\ldots,\sigma_p^2).
+$$
+
+* El **vector de desviaciones típicas**  de  $\underline{X}$ es el vector formado por las desviaciones típicas de sus componentes:
+$$
+\sigma(\underline{X})=(\sigma(X_1),\ldots,\sigma(X_p))=(\sigma_1,\ldots,\sigma_p).
+$$
+
+
+### Tipificación
+
+Sea $X$  una variable aleatoria de media $\mu$ y desviación típica $\sigma$. Recordemos que si $a,b\in \mathbb{R}$, entonces $aX+b$ es una variable aleatoria de media, varianza y desviación típica, respectivamente,
+$$
+E(aX+b)=a\mu+b,\quad Var(aX+b)=a^2\sigma^2,\quad \sigma(aX+b)=|a|\sigma.
+$$
+La **variable tipificada** de $X$ es la variable aleatoria
+$$
+Z=\frac{X-\mu}{\sigma}.
+$$
+Habréis observado que al tipificar una variable dividimos por su desviación típica. De ahora en adelante, supondremos todas nuestras variables  aleatorias no constantes, por lo que su desviación típica será siempre no nula y podremos dividir por ella. De todas formas,  si la variable aleatoria es constante, se toma como variable tipificada la constante 0.
+
+
+
+Las fórmulas anteriores implican que si $Z$ es una variable tipificada, entonces $E(Z)=0$ y $\sigma(Z)=1$. 
+Por ejemplo, cuando construimos una variable aleatoria normal estándar  a partir de una variable normal  $X$ restándole su media y dividiendo el resultado por su desviación típica, lo que hacemos es tipificarla. 
+
+
+Si $\underline{X}=(X_1,\ldots,X_p)$ es un vector aleatorio, su **vector tipificado** $\underline{Z}$ se obtiene substituyendo cada $X_i$ por su variable tipificada:
+$$
+\underline{Z}=\Big(\frac{X_1-\mu_1}{\sigma_1},\ldots,\frac{X_p-\mu_p}{\sigma_p}\Big).
+$$
+
+
+### Covarianzas
+
+Dadas dos variables aleatorias $X_1$ y $X_2$ de medias $\mu_1$ y $\mu_2$, respectivamente, su **covarianza** es 
+$$
+Cov(X_1,X_2)=E((X_1-\mu_1)\cdot ( X_2-\mu_2)).
+$$
+Es fácil comprobar que la covarianza también se puede calcular mediante la identidad
+$$
+Cov(X_1,X_2)=E(X_1\cdot X_2) -\mu_1\cdot \mu_2.
+$$
+En efecto
+$$
+\begin{array}{rl}
+Cov(X_1,X_2) & =E((X_1-\mu_1) ( X_2-\mu_2))=
+E(X_1X_2-\mu_1X_2-\mu_2X_1+\mu_1\mu_2)\\ &
+=E(X_1X_2)-\mu_1E(X_2)-\mu_2E(X_1)+\mu_1\mu_2\\ &=
+E(X_1X_2)-\mu_1\mu_2-\mu_2\mu_1+\mu_1\mu_2
+=E(X_1X_2)-\mu_1\mu_2
+\end{array}
+$$
+La covarianza de  $X_1$ y $X_2$ puede tomar cualquier valor real, y mide el grado de variación conjunta de las variables. Si valores grandes de una variable corresponden a valores grandes de la otra, su covarianza es positiva. En el caso opuesto, si valores grandes de una variable  corresponden a valores pequeños de la otra, su covarianza es negativa. Por lo tanto, el signo de la covarianza refleja la tendencia de la relación entre las variables. En cambio, su magnitud en valor absoluto no tiene una interpretación sencilla.
+
+Si $X_1$ y $X_2$ son variables independientes, entonces su covarianza es 0, puesto que en este caso $E(X_1\cdot X_2) =\mu_1\mu_2$. El recíproco es falso: dos variables aleatorias pueden tener covarianza 0 y no ser independientes, como muestra el ejemplo siguiente.
+
+**Ejemplo 1.** Supongamos que tenemos un dado tetraédrico no trucado con las caras marcadas con los valores $-2$, $-1$, 1 y 2. Sean $X$ la variable aleatoria consistente en lanzar el dado y anotar el resultado, e $Y$ la variable aleatoria consistente en lanzar el dado y anotar **el cuadrado** del resultado obtenido. Como las cuatro caras del dado son equiprobables, 
+$$
+\begin{array}{l}
+\displaystyle P(X=-2)=P(X=-1)=P(X=1)=P(X=2)=\frac{1}{4}\\[2ex]
+\displaystyle  P(Y=1)=P(Y=4)=\frac{1}{2}
+\end{array}
+$$
+Como $Y$ es función de $X$, ya que $Y=X^2$, cuesta creer que $X$ e $Y$ vayan a ser independientes. Veamos que, en efecto, no lo son.  Observad que 
+ los únicos posibles valores para el vector $(X,Y)$ en una tirada del dado son $(-2,4)$, $(-1,1)$, $(1,1)$ y $(2,4)$, cada uno con probabilidad $1/4$. Entonces, por ejemplo, la probabilidad de obtener en una tirada $X=-1$ e $Y=4$ es 0 (es imposible), mientras que 
+$$
+P(X=-1)\cdot P(Y=4)=\frac{1}{4}\cdot\frac{1}{2}=\frac{1}{8}\neq 0.
+$$
+Veamos que la covarianza de $X$ e $Y$ es 0. Para calcularla, primero necesitamos conocer los valores esperados de las variables:
+$$
+\begin{array}{l}
+\displaystyle E(X)=(-2)\cdot \frac{1}{4}+(-1)\cdot \frac{1}{4}+1\cdot \frac{1}{4}+2\cdot \frac{1}{4}=0\\
+\displaystyle E(Y)=1\cdot \frac{1}{2}+4\cdot \frac{1}{2}=2.5
+\end{array}
+$$
+Por lo tanto
+$$
+\begin{array}{l}
+Cov(X,Y)=E\big(X\cdot Y\big)-E(X)\cdot E(Y)=E\big(X\cdot Y\big)-0\cdot 2.5=E\big(X\cdot Y\big)\\
+\qquad =P\big(X=-2,Y=4\big)\cdot (-2\cdot 4)+P\big(X=-1,Y=1\big)\cdot (-1\cdot 1)\\\qquad\qquad\qquad+P\big(X=1,Y=1\big)\cdot (1\cdot 1)+P\big(X=2,Y=4\big)\cdot (2\cdot 4)\\
+\qquad =\displaystyle \frac{1}{4}\cdot (-8)+\frac{1}{4}\cdot (-1)+\frac{1}{4}\cdot 1+\frac{1}{4}\cdot 8=0.
+\end{array}
+$$
+Por lo tanto, $X$ e $Y$ son variables dependientes, pero su covarianza es 0. 
+
+La covarianza es simétrica, $Cov(X_1,X_2)=Cov(X_2,X_1)$, y la covarianza de una variable aleatoria consigo misma es su varianza: 
+$$
+Cov(X,X)=E((X-\mu)^2)=Var(X).
+$$
+Para simplificar la notación, se suele utilizar $\sigma_{ij}$ para denotar la covarianza de dos variables aleatorias $X_i$ y $X_j$ que formen parte de un vector aleatorio. Es decir,  escribiremos
+$$
+\sigma_{i j}=Cov(X_i,X_j)\mbox{ y }
+\sigma_{ii}=Cov(X_i,X_i)=\sigma_i^2.
+$$
+
+
+Igual que en el caso unidimensional, un vector aleatorio $\underline{X}=(X_1,\ldots,X_p)$
+admite  una medida de su dispersión respecto de su valor esperado $\boldsymbol\mu$. Es su  **matriz  de covarianzas**, que se define como
+$$
+\begin{array}{l}
+\displaystyle Cov(\underline{X})  =E((\underline{X}-\boldsymbol\mu)^t\cdot (\underline{X}-\boldsymbol\mu))=
+E\left(\!\begin{pmatrix} X_1-\mu_1 \\ X_2-\mu_2 \\ \vdots \\ X_p-\mu_p\end{pmatrix}\!\cdot\!
+(X_1-\mu_1, X_2-\mu_2,\ldots,X_p-\mu_p)\right)\\[3ex] 
+\displaystyle \quad
+=\begin{pmatrix} E((X_1-\mu_1)^2) & E((X_1-\mu_1)(X_2-\mu_2)) & \ldots  & E((X_1-\mu_1)(X_p-\mu_p))\\
+E((X_2-\mu_2)(X_1-\mu_1)) & E((X_2-\mu_2)^2)  &  \ldots  &E((X_2-\mu_2)(X_p-\mu_p))\\
+\vdots & \vdots & \ddots  & \vdots\\
+E((X_p-\mu_p)(X_1-\mu_1)) & E((X_p-\mu_p)(X_2-\mu_2)) & \ldots  &  E((X_p-\mu_p)^2) 
+ \end{pmatrix}
+\\[3ex] \displaystyle\quad
+=\begin{pmatrix} \sigma_{1 1} & \sigma_{1 2} & \ldots & \sigma_{1
+p}\\
+\sigma_{2 1} & \sigma_{2 2} & \ldots & \sigma_{2 p}\\
+\vdots & \vdots &\ddots  & \vdots\\
+\sigma_{p 1} & \sigma_{p 2} & \ldots & \sigma_{p p}\\
+ \end{pmatrix}
+\end{array}
+$$
+Es decir, la matriz de covarianzas de $\underline{X}$ tiene como entrada $(i,j)$ la covarianza $\sigma_{ij}$ de $X_i$ y $X_j$. Se puede comprobar fácilmente que esta matriz se puede calcular mediante la identidad
+$$
+Cov(\underline{X})=E(\underline{X}^t\cdot \underline{X})-\boldsymbol\mu^t\cdot \boldsymbol\mu.
+$$
+
+
+### Correlaciones
+Como el valor concreto de la covarianza es difícil  de interpretar, para medir la relación lineal entre dos variables aleatorias se usa el llamado **coeficiente de correlación lineal de Pearson** (o **correlación** a secas), que viene a ser una versión normalizada de la covarianza. En concreto,
+la **correlación** de las variables $X_i$ y $X_j$ se define como el cociente
+$$
+Cor(X_i,X_j)=\frac{\sigma_{i j}}{\sigma_{i} \sigma_{j}},
+$$
+y es una medida adimensional de
+la relación entre $X_i$ y $X_j$. A menudo denotaremos $Cor(X_i,X_j)$ por medio de $\rho_{ij}$.
+
+Las correlaciones  tienen las propiedades siguientes:
+
+a) $-1\leq \rho_{i j}\leq 1$.
+
+b)  $\rho_{i j}= \rho_{j i}$ y $\rho_{ii}=1$.
+
+
+d) Si $a_i,a_j,b_i,b_j\in \mathbb{R}$ y $a_i,a_j\neq 0$, entonces
+$$
+Cor(a_iX_i+b_i,a_jX_j+b_j)=\pm Cor(X_i,X_j),
+$$
+donde el signo que aparece es el del producto $a_i\cdot a_j$.
+
+e) Si $\rho_{i j}=\pm 1$, las variables tienen una relación lineal perfecta, es decir, existen $\alpha,\beta\in \mathbb{R}$ tales que $X_i=\alpha X_j+\beta$. La
+pendiente $\alpha$ de esta recta tiene el mismo signo que la correlación.
+
+f)  Si $\rho_{i j}=0$, decimos que las variables $X_i$ y $X_j$ son **incorreladas**.
+Notemos que la correlación es 0 si, y sólo si, la covarianza es 0. Por lo tanto, dos variables aleatorias independientes son incorreladas. El recíproco en general es falso, como muestra el Ejemplo 1.
+
+g) La correlación de dos variables es igual a la covarianza de sus variables tipificadas,
+$$
+Cor(X_i,X_j)=Cov\Big(\frac{X_i-\mu_i}{\sigma_i},\frac{X_j-\mu_j}{\sigma_j}\Big).
+$$
+
+
+La **matriz de correlaciones** de un vector aleatorio $\underline{X}=(X_1,\ldots,X_p)$ es
+$$
+Cor(\underline{X})
+=\begin{pmatrix} 1 & \rho_{1 2} & \ldots & \rho_{1 p}\\
+\rho_{2 1} & 1 & \ldots & \rho_{2 p}\\
+\vdots & \vdots & \ddots & \vdots\\
+\rho_{p 1} & \rho_{p 2} & \ldots & 1\\
+ \end{pmatrix}.
+$$
+Por la propiedad (f) anterior,  la matriz de correlaciones de un vector aleatorio $\underline{X}$ es igual a la matriz de covarianzas de su vector tipificado $\underline{Z}$.
+
+## Test
+
+*(1)* Cuáles de las afirmaciones siguientes sobre la covarianza de dos variables aleatorias son verdaderas?
+
+a. Es siempre $\geq 0$
+a. Solo puede tomar valores entre -1 y 1
+a. Mide la tendencia general de las dos variables a variar conjuntamente 
+a. Es el cociente de las varianzas de las dos variables aleatorias
+a. Vale 0 si las dos variables son independientes 
+a. Si vale 0, las dos variables son independientes 
+a. Solo está definida para pares de variables aleatorias que pueden tomar los mismos valores 
+a. Solo está definida para pares de variables aleatorias que pueden tomar el mismo número de valores diferentes
+a. Todas las otras afirmaciones son falsas
+
+*(2)* Cuáles de las afirmaciones siguientes sobre la correlación de Pearson de dos variables aleatorias son verdaderas? 
+
+a. Puede tomar cualquier valor real
+a. Es siempre $\geq 0$
+a. Solo puede tomar valores entre -1 y 1
+a. Mide la tendencia general de las dos variables a variar conjuntamente 
+a. Mide la tendencia de las dos variables a variar conjuntamente según una función lineal 
+a. Es la raíz cuadrada de la covarianza
+a. Si vale 0, las dos variables son independientes 
+a. Se obtiene tipificando su covarianza
+a. Todas las otras afirmaciones son falsas
+
+*(3)* Cuáles de las matrices siguientes son matrices de correlaciones de Pearson de un vector de dos variables aleatorias?
+
+a. $\left(\begin{array}{ccc} 1 & 1\cr 1 & 1  \end{array}\right)$ 
+a.  $\left(\begin{array}{ccc} 1 & 1.2   \cr  1.2 & 1  \end{array}\right)$
+a.  $\left(\begin{array}{ccc} 1 & 0.8\cr -0.8 & 1  \end{array}\right)$
+a.  $\left(\begin{array}{ccc} 0.6 & 0.8\cr 0.8 & 0.6  \end{array}\right)$
+a.  $\left(\begin{array}{ccc} 1 & 0\cr 0 & 1  \end{array}\right)$ 
+a. Todas las otras respuestas son falsas
+
+
+
+
