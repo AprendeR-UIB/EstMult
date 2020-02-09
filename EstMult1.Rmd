@@ -10,7 +10,7 @@ output:
 
 ### Vectores aleatorios
 
-Una **variable aleatoria $p$-dimensional**, o **vector aleatorio de dimensión $p$**, es un vector (fila) compuesto por $p$ variables aleatorias 
+Una **variable aleatoria $p$-dimensional**, o **vector aleatorio de dimensión $p$**, es un vector compuesto por $p$ variables aleatorias 
 $$
 \underline{X}=(X_1,X_2,\ldots,X_p).
 $$
@@ -89,7 +89,7 @@ La covarianza de  $X_1$ y $X_2$ puede tomar cualquier valor real, y mide el grad
 
 Si $X_1$ y $X_2$ son variables independientes, entonces su covarianza es 0, puesto que en este caso $E(X_1\cdot X_2) =\mu_1\mu_2$. El recíproco es falso: dos variables aleatorias pueden tener covarianza 0 y no ser independientes, como muestra el ejemplo siguiente.
 
-**Ejemplo 1.** Supongamos que tenemos un dado tetraédrico no trucado con las caras marcadas con los valores $-2$, $-1$, 1 y 2. Sean $X$ la variable aleatoria consistente en lanzar el dado y anotar el resultado, e $Y$ la variable aleatoria consistente en lanzar el dado y anotar **el cuadrado** del resultado obtenido. Como las cuatro caras del dado son equiprobables, 
+**Ejemplo 1.** Supongamos que tenemos un dado tetraédrico no trucado con las caras marcadas con los valores -2, -1, 1 y 2. Sean $X$ la variable aleatoria consistente en lanzar el dado y anotar el resultado, e $Y$ la variable aleatoria consistente en lanzar el dado y anotar **el cuadrado** del resultado obtenido. Como las cuatro caras del dado son equiprobables, 
 $$
 \begin{array}{l}
 \displaystyle P(X=-2)=P(X=-1)=P(X=1)=P(X=2)=\frac{1}{4}\\[2ex]
